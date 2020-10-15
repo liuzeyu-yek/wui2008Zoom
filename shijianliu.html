@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .one {
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+
+        }
+
+        .two {
+            width: 100px;
+            height: 100px;
+            border: 1px solid blue;
+
+        }
+    </style>
+</head>
+<body>
+<div class="one">
+    <div class="two"></div>
+</div>
+<!--
+
+  事件执行的流程   事件流
+
+  // 事件由里向外依次执行的流程，冒泡型事件流，是浏览器里面默认的事件流
+  // 由最确定的元素向外层最不确定的元素扩散，
+
+  // 只要子元素触发了某一个事件，那么他所有的前辈元素都能捕获到
+
+
+  // 捕获型事件流，由不确定的元素，向最确定的元素传播，由最外层想最里层传播
+
+
+
+-->
+
+
+
+
+<script>
+
+    var one = document.querySelector(".one");
+    var two = document.querySelector(".two");
+
+
+    one.onmouseover=function (ev) {
+            //console.log(ev.fromElement);
+
+        console.log(1);
+    }
+    //
+    // one.onmouseout=function (ev) {
+    //     console.log(ev.toElement);
+    // }
+
+
+       //one.contains(document.body)//  检测一个元素是否包含另外一个元素  true false;
+
+
+
+    // four.onmouseover=function (ev) {
+    //     ev.stopPropagation();
+    // }
+    // three.onmouseover=function (ev) {
+    //     ev.stopPropagation();
+    // }
+    // two.onmouseover=function (ev) {
+    //     ev.stopPropagation();
+    // }
+
+
+
+    /*
+    *   哪一类事件及其容易触发事件流
+    *
+    *   有动作的事件不容易触发  click  dbclick mousedown mouseup
+    *            ev.stopPropagation();
+    *
+    *
+    *   什么样的事件及其容易触发事件流  mousemove  mouseout mouseover
+    *
+    *
+    *     1. 改变html的结构   mousemove
+    *
+    *     2. mouseover  mouseout
+    *
+    *
+    * */
+
+    // mouseenter(one,function () {
+    //     console.log(1);
+    // })
+    // mouseleave(one,function () {
+    //     console.log(2);
+    // })
+
+
+    one.onmousedown=function (ev) {
+        //console.log(ev.type);
+
+
+    }
+
+    //   ev.clientX   ev.clientY    ev.screenX   ev.offsetX
+
+    //   ev.preventDefault()  ev.stopPropagation()   ev.type
+
+    //   ev.fromElement    ev.toElement    ev.keyCode  ev.ctrlKey
+
+
+
+    hover(one,function () {
+        one.style.width=one.offsetWidth+10+"px"
+    },function () {
+        one.style.height=one.offsetHeight+10+"px"
+    })
+
+
+
+    
+    function hover(obj,overfn,outfn) {
+        obj.onmouseover=function (ev) {
+            if(check(ev,obj)) {
+                if(overfn) {
+                    overfn(ev);
+                }
+            }
+        }
+        obj.onmouseout=function (ev) {
+            if(check(ev,obj)) {
+                if(outfn) {
+                    outfn(ev);
+                }
+            }
+        }
+    }
+
+
+    function mouseenter(obj,callback) {
+        obj.onmouseover=function (ev) {
+            if(check(ev,obj)) {
+                callback();
+            }
+        }
+    }
+    function mouseleave(obj,callback) {
+        obj.onmouseout=function (ev) {
+            if(check(ev,obj)) {
+                callback();
+            }
+        }
+    }
+
+    function check(ev,obj) {
+        if(ev.type=="mouseover") {
+            return !obj.contains(ev.fromElement);
+        }else if(ev.type=="mouseout"){
+            return !obj.contains(ev.toElement);
+        }
+    }
+
+
+
+
+
+</script>
+</body>
+</html>
