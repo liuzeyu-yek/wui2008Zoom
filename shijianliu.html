@@ -47,15 +47,34 @@
 
 <script>
 
+
+    //  事件流的讲解   50%  问题 解决的方案，
     var one = document.querySelector(".one");
     var two = document.querySelector(".two");
 
-
-    one.onmouseover=function (ev) {
-            //console.log(ev.fromElement);
-
-        console.log(1);
+    one.onmouseleave=function () {
+        console.log(2);
     }
+    one.onmouseenter=function () {
+        console.log(1)
+    }
+
+    // one.onmouseover=function () {
+    //     console.log(1)
+    // }
+    //
+    // one.onmouseout=function () {
+    //     console.log(2);
+    // }
+
+
+
+
+    // one.onmouseover=function (ev) {
+    //         //console.log(ev.fromElement);
+    //
+    //     console.log(1);
+    // }
     //
     // one.onmouseout=function (ev) {
     //     console.log(ev.toElement);
@@ -103,11 +122,8 @@
     // })
 
 
-    one.onmousedown=function (ev) {
-        //console.log(ev.type);
 
 
-    }
 
     //   ev.clientX   ev.clientY    ev.screenX   ev.offsetX
 
@@ -117,55 +133,55 @@
 
 
 
-    hover(one,function () {
-        one.style.width=one.offsetWidth+10+"px"
-    },function () {
-        one.style.height=one.offsetHeight+10+"px"
-    })
-
-
-
-    
-    function hover(obj,overfn,outfn) {
-        obj.onmouseover=function (ev) {
-            if(check(ev,obj)) {
-                if(overfn) {
-                    overfn(ev);
-                }
-            }
-        }
-        obj.onmouseout=function (ev) {
-            if(check(ev,obj)) {
-                if(outfn) {
-                    outfn(ev);
-                }
-            }
-        }
-    }
-
-
-    function mouseenter(obj,callback) {
-        obj.onmouseover=function (ev) {
-            if(check(ev,obj)) {
-                callback();
-            }
-        }
-    }
-    function mouseleave(obj,callback) {
-        obj.onmouseout=function (ev) {
-            if(check(ev,obj)) {
-                callback();
-            }
-        }
-    }
-
-    function check(ev,obj) {
-        if(ev.type=="mouseover") {
-            return !obj.contains(ev.fromElement);
-        }else if(ev.type=="mouseout"){
-            return !obj.contains(ev.toElement);
-        }
-    }
+    // hover(one,function () {
+    //     one.style.width=one.offsetWidth+10+"px"
+    // },function () {
+    //     one.style.height=one.offsetHeight+10+"px"
+    // })
+    //
+    //
+    //
+    //
+    // function hover(obj,overfn,outfn) {
+    //     obj.onmouseover=function (ev) {
+    //         if(check(ev,obj)) {
+    //             if(overfn) {
+    //                 overfn(ev);
+    //             }
+    //         }
+    //     }
+    //     obj.onmouseout=function (ev) {
+    //         if(check(ev,obj)) {
+    //             if(outfn) {
+    //                 outfn(ev);
+    //             }
+    //         }
+    //     }
+    // }
+    //
+    //
+    // function mouseenter(obj,callback) {
+    //     obj.onmouseover=function (ev) {
+    //         if(check(ev,obj)) {
+    //             callback();
+    //         }
+    //     }
+    // }
+    // function mouseleave(obj,callback) {
+    //     obj.onmouseout=function (ev) {
+    //         if(check(ev,obj)) {
+    //             callback();
+    //         }
+    //     }
+    // }
+    //
+    // function check(ev,obj) {
+    //     if(ev.type=="mouseover") {
+    //         return !obj.contains(ev.fromElement);
+    //     }else if(ev.type=="mouseout"){
+    //         return !obj.contains(ev.toElement);
+    //     }
+    // }
 
 
 
